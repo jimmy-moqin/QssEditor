@@ -1,0 +1,360 @@
+$base-color: #272822;
+$title-widget:#1E1F1C;
+$menu-word-1st:#CCCCCC;
+$menu-span-hover:#272822;
+$function-label:#272822;
+$file-list-widget:#1E1F1C;
+$icon:#CCCCCC;
+
+#centralwidget{
+    background-color: $base-color;
+}
+
+#titleWidget{
+    background-color: $title-widget;
+}
+
+#leftWidget{
+    background-color: $base-color;
+}
+// leftWidget Btns
+
+#processBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+
+#projectTitleLabel{
+    color: $icon;
+    font-family: "Source Han Sans CN";
+    font-size: 16px;
+    font-weight: bold;
+    height: 40px;
+}
+
+#documentBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+#tableBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+#imageBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+#searchBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+#historyBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+#todoBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+#settingBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+#githubBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+// titleWidget MenuBtns
+
+
+
+#fileBtn{
+    background-color: $title-widget;
+    color: $icon;
+    // Q:what is the font-family name of 思源黑体?
+    font-family: "Source Han Sans CN";
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    width: 64px;
+    height: 40px;
+    &:hover{
+        background-color: $menu-span-hover;
+    }
+    &::menu-indicator { image: none; }
+}
+
+.QMenu{
+    background-color: #414339;
+    min-width: 128px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 10px;
+    border: none;
+    &::item{
+        background-color: #414339;
+        color: $icon;
+        font-family: "Source Han Sans CN";
+        font-size: 18px;
+        font-weight: bold;
+        height: 1.25em;
+        padding-left: 32px;
+        padding-right: 32px;
+        border: none;
+        min-width: 256px;
+        border-radius: 10px;
+        &:selected{
+            background-color:#75715E;
+        }
+    }
+}
+
+
+#editBtn{
+    background-color: $title-widget;
+    color: $icon;
+    font-family: "Source Han Sans CN";
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    width: 64px;
+    height: 40px;
+    &:hover{
+        background-color: $menu-span-hover;
+    }
+    &::menu-indicator { image: none; }
+}
+
+
+#viewBtn{
+    background-color: $title-widget;
+    color: $icon;
+    font-family: "Source Han Sans CN";
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    width: 64px;
+    height: 40px;
+}
+
+#viewBtn:hover{
+    background-color: $menu-span-hover;
+}
+
+#helpBtn{
+    background-color: $title-widget;
+    color: $icon;
+    font-family: "Source Han Sans CN";
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    width: 64px;
+    height: 40px;
+}
+
+#helpBtn:hover{
+    background-color: $menu-span-hover;
+}
+
+// titleWidget controlBtns
+
+#minBtn{
+    background-color: $title-widget;
+    color: $icon;
+    background-image: url(:/dark/img/min.png);
+    background-repeat: no-repeat;
+    background-position:center;
+    border: none;
+    min-width: 42px;
+}
+
+#minBtn:hover{
+    background-color:$menu-span-hover;
+}
+
+#maxBtn{
+    background-color: $title-widget;
+    color: $icon;
+    background-image: url(:/dark/img/max.png);
+    background-repeat: no-repeat;
+    background-position:center;
+    border: none;
+    min-width: 42px;
+    min-height: 20px;
+}
+
+#maxBtn:hover{
+    background-color:$menu-span-hover;
+}
+
+#closeBtn{
+    background-color: $title-widget;
+    color: $icon;
+    background-image: url(:/dark/img/close.png);
+    background-repeat: no-repeat;
+    background-position:center;
+    border: none;
+    min-width: 42px;
+}
+
+#closeBtn:hover{
+    background-color:$menu-span-hover;
+}
+
+#logo{
+    background-image: url(:/dark/img/logo.png);
+    background-repeat: no-repeat;
+    background-position:center;
+}
+
+#fileListWidget{
+    background-color: $file-list-widget;
+    color: $icon;
+    border: none;
+}
+
+#listWidget{
+    background-color: $file-list-widget;
+    color: $icon;
+    border: none;
+}
+
+#functionLabel{
+    background-color: $title-widget;
+    color: $menu-word-1st;
+    border: none;
+    font-family: "Source Han Sans CN";
+    font-weight: bold;
+    font-size: 18px;
+    min-height: 40px;
+}
+
+// homepage 
+#startLabel{
+    color: $icon;
+    border: none;
+    font-family: "Source Han Sans CN";
+    font-weight: bold;
+    font-size: 64px;
+}
+
+#tipsLabel{
+    color: $icon;
+    border: none;
+    font-family: "Source Han Sans CN";
+    font-weight: bold;
+    font-size: 32px;
+    margin-top: 32px;
+}
+
+#newprojectBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+#openprojectBtn{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+}
+
+#newprojectLabel{
+    color: $icon;
+    border: none;
+    font-family: "Source Han Sans CN";
+    font-weight: bold;
+    font-size: 32px;
+}
+
+#openprojectLabel{
+    color: $icon;
+    border: none;
+    font-family: "Source Han Sans CN";
+    font-weight: bold;
+    font-size: 32px;
+}
+
+#EditorTabWidget .QWidget{
+    background-color: #272822;
+    color: $icon;
+    border: none;
+}
+
+
+#EditorTabWidget{
+    background-color: #272822;
+    color: $icon;
+    border: none;
+}
+
+.QTabBar::tab{
+    background-color: #414339;
+    color: #73AB4D;
+    border: none;
+    min-width: 150px;
+    min-height: 40px;
+    font-family: "Source Han Sans CN";
+    font-size: 18px;
+    &:selected{
+        background-color: $title-widget;
+        border-bottom: 1px solid #CCCCCC;
+    }
+}
+
+.CodeEditor{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+    selection-background-color: #135564;
+
+}
+
+.QScrollBar{
+    width: 20px;
+    background: rgba(0,0,0,0%);
+    margin: 0px,0px,0px,0px;
+    &::handle
+    {
+        background:#525250;  
+        border-radius:6px; 
+        margin-left:2px;  
+        margin-right:2px; 
+    }
+    &::sub-page{
+        background: #272822;
+        border-radius: 4px;
+    }
+    &::add-page{
+        background: #272822;
+        border-radius: 4px;
+    }
+    &::sub-line
+    {
+        border:none;
+    }
+    &::add-line
+    {
+        border:none;
+    }
+}
+
+
