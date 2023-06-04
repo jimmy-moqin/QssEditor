@@ -2,13 +2,14 @@ import sass
 import tinycss
 from PyQt5.QtWidgets import QMainWindow, QWidget
 from ui.demoUI import Ui_demoWidget
-
+from ui.homepage import Ui_HomePage
 
 class DemoLogic(QWidget, Ui_demoWidget):
 
     def __init__(self):
         super(DemoLogic, self).__init__()
         self.setupUi(self)
+        
         
         self.initUI()
     

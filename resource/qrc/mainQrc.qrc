@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="dark">
+    <file>../img/order-editor.png</file>
+    <file>../img/qe.png</file>
+    <file>../img/scss.png</file>
     <file>../img/close.png</file>
     <file>../img/document.png</file>
     <file>../img/document_blue.png</file>

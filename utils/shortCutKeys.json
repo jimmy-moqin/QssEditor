@@ -1,0 +1,17 @@
+{
+    "NEW_FILE":"Ctrl+N",
+    "OPEN_FILE":"Ctrl+O",
+    "OPEN_FOLDER":"Ctrl+Shift+O",
+    "SAVE_FILE":"Ctrl+S",
+    "SAVE_FILE_AS":"Ctrl+Shift+S",
+    "SAVE_ALL_FILES":"Ctrl+Alt+S",
+    "CLOSE":"Ctrl+W",
+    "CLOSE_ALL":"Ctrl+Shift+W",
+    "QUIT":"Ctrl+Q",
+    "COPY":"Ctrl+C",
+    "PASTE":"Ctrl+V",
+    "CUT":"Ctrl+X",
+    "SELECT_ALL":"Ctrl+A",
+    "UNDO":"Ctrl+Z",
+    "REDO":"Ctrl+Y"
+}

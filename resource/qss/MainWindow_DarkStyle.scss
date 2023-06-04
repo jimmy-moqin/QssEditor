@@ -4,10 +4,22 @@ $menu-word-1st:#CCCCCC;
 $menu-span-hover:#272822;
 $function-label:#272822;
 $file-list-widget:#1E1F1C;
+$file-list-widget-item-hover:#414339;
 $icon:#CCCCCC;
 
 #centralwidget{
     background-color: $base-color;
+}
+
+.QStatusBar{
+    background-color: $file-list-widget-item-hover;
+}
+
+.homepageLogo{
+    // background-position: center ;
+    border: none;
+    max-width: 256px;
+    max-height: 256px;
 }
 
 #titleWidget{
@@ -94,7 +106,7 @@ $icon:#CCCCCC;
     font-size: 18px;
     font-weight: bold;
     border: none;
-    width: 64px;
+    width: 80px;
     height: 40px;
     &:hover{
         background-color: $menu-span-hover;
@@ -135,7 +147,7 @@ $icon:#CCCCCC;
     font-size: 18px;
     font-weight: bold;
     border: none;
-    width: 64px;
+    width: 80px;
     height: 40px;
     &:hover{
         background-color: $menu-span-hover;
@@ -151,7 +163,7 @@ $icon:#CCCCCC;
     font-size: 18px;
     font-weight: bold;
     border: none;
-    width: 64px;
+    width: 80px;
     height: 40px;
 }
 
@@ -166,7 +178,7 @@ $icon:#CCCCCC;
     font-size: 18px;
     font-weight: bold;
     border: none;
-    width: 64px;
+    width: 80px;
     height: 40px;
 }
 
@@ -220,22 +232,38 @@ $icon:#CCCCCC;
 }
 
 #logo{
-    background-image: url(:/dark/img/logo.png);
-    background-repeat: no-repeat;
-    background-position:center;
+    // background-image: url(:/dark/img/qe.png);
+    // background-repeat: no-repeat;
+    // background-position:center;
+    // background-size: contain;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-#fileListWidget{
-    background-color: $file-list-widget;
-    color: $icon;
-    border: none;
-}
+
 
 #listWidget{
     background-color: $file-list-widget;
     color: $icon;
     border: none;
+    font-size: 18px;
+    outline: 0px;
+    &:item{
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 1.5em;
+        font-family: "Source Han Sans CN";
+        border: none;
+    }
+    &:item:selected{
+        background-color: $file-list-widget-item-hover;
+        color: #FFE9C0;
+        border: none;
+        
+    }
 }
+
+
 
 #functionLabel{
     background-color: $title-widget;
@@ -310,7 +338,7 @@ $icon:#CCCCCC;
     background-color: #414339;
     color: #73AB4D;
     border: none;
-    min-width: 150px;
+    min-width: 250px;
     min-height: 40px;
     font-family: "Source Han Sans CN";
     font-size: 18px;
@@ -357,4 +385,34 @@ $icon:#CCCCCC;
     }
 }
 
+#codeListWidget{
+    background-color: $base-color;
+    color: $icon;
+    border: 1px solid #75715E;
+    font-family: "Source Han Sans CN";
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 300px;
+    min-width: 400px;
+    &::item{
+        background-color: $base-color;
+        height: 2em;
+        padding-left: 15px;
+    }
+    &::item:selected{
+        background-color: #75715E;
+        color: #FFFFFF;
+        padding-left: 30px;
+        font-size: 24px;
 
+    }
+}
+
+#hpTipsWidget .QLabel{
+    background-color: $base-color;
+    color: $icon;
+    border: none;
+    font-family: "Source Han Sans CN";
+    font-size: 24px;
+    font-weight: bold;
+}
