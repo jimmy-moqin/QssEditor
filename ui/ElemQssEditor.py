@@ -35,7 +35,7 @@ class Ui_ElemQssEidtorMainWindow(object):
         self.horizontalLayout_8.setSpacing(0)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.logo = QtWidgets.QLabel(self.titleWidget)
-        self.logo.setMaximumSize(QtCore.QSize(40, 30))
+        self.logo.setMaximumSize(QtCore.QSize(40, 40))
         self.logo.setText("")
         self.logo.setPixmap(QtGui.QPixmap(":/dark/img/qe.png"))
         self.logo.setScaledContents(True)
@@ -274,7 +274,7 @@ class Ui_ElemQssEidtorMainWindow(object):
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.EditorTabWidget = QtWidgets.QTabWidget(self.editorPage)
         self.EditorTabWidget.setObjectName("EditorTabWidget")
-        self.CodeEditor = CodeEditor()
+        self.CodeEditor = QtWidgets.QWidget()
         self.CodeEditor.setObjectName("CodeEditor")
         self.EditorTabWidget.addTab(self.CodeEditor, "")
         self.tab_4 = QtWidgets.QWidget()
@@ -413,7 +413,7 @@ class Ui_ElemQssEidtorMainWindow(object):
         ElemQssEidtorMainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(ElemQssEidtorMainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         self.EditorTabWidget.setCurrentIndex(0)
         self.previewTabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(ElemQssEidtorMainWindow)
@@ -459,5 +459,4 @@ class Ui_ElemQssEidtorMainWindow(object):
         self.pushButton_6.setText(_translate("ElemQssEidtorMainWindow", "Danger"))
         self.previewTabWidget.setTabText(self.previewTabWidget.indexOf(self.ButtonTab), _translate("ElemQssEidtorMainWindow", "Buttons"))
         self.previewTabWidget.setTabText(self.previewTabWidget.indexOf(self.tab_2), _translate("ElemQssEidtorMainWindow", "Tab 2"))
-from codeeditor import CodeEditor
 from resource.qrc import mainQrc_rc

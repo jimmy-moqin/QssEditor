@@ -20,8 +20,6 @@ from PySide6.QtWidgets import (QApplication, QFormLayout, QHBoxLayout, QLabel,
     QPushButton, QSizePolicy, QSpacerItem, QSplitter,
     QStackedWidget, QStatusBar, QTabWidget, QVBoxLayout,
     QWidget)
-
-from codeeditor import CodeEditor
 import mainQrc_rc
 
 class Ui_ElemQssEidtorMainWindow(object):
@@ -50,7 +48,7 @@ class Ui_ElemQssEidtorMainWindow(object):
         self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.logo = QLabel(self.titleWidget)
         self.logo.setObjectName(u"logo")
-        self.logo.setMaximumSize(QSize(40, 30))
+        self.logo.setMaximumSize(QSize(40, 40))
         self.logo.setPixmap(QPixmap(u":/dark/img/qe.png"))
         self.logo.setScaledContents(True)
 
@@ -355,7 +353,7 @@ class Ui_ElemQssEidtorMainWindow(object):
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.EditorTabWidget = QTabWidget(self.editorPage)
         self.EditorTabWidget.setObjectName(u"EditorTabWidget")
-        self.CodeEditor = CodeEditor()
+        self.CodeEditor = QWidget()
         self.CodeEditor.setObjectName(u"CodeEditor")
         self.EditorTabWidget.addTab(self.CodeEditor, "")
         self.tab_4 = QWidget()
@@ -559,7 +557,7 @@ class Ui_ElemQssEidtorMainWindow(object):
 
         self.retranslateUi(ElemQssEidtorMainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         self.EditorTabWidget.setCurrentIndex(0)
         self.previewTabWidget.setCurrentIndex(0)
 

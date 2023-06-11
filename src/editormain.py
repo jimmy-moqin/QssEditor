@@ -1,7 +1,6 @@
 import os
 
 import sass
-from codeeditor import CodeEditor
 from PyQt5.QtCore import QPoint, Qt
 from PyQt5.QtGui import QIcon, QKeySequence
 from PyQt5.QtWidgets import (QComboBox, QDesktopWidget, QFileDialog,
@@ -10,6 +9,8 @@ from PyQt5.QtWidgets import (QComboBox, QDesktopWidget, QFileDialog,
 from ui.ElemQssEditor import Ui_ElemQssEidtorMainWindow
 from utils.sassHighLight import SassHighlighter
 from utils.shortCutKeys import ShortCutKeys
+from widgets.codeeditor import CodeEditor
+from widgets.codeprompt import CodePrompt
 
 
 class EditorMain(QMainWindow, Ui_ElemQssEidtorMainWindow):
@@ -92,6 +93,7 @@ class EditorMain(QMainWindow, Ui_ElemQssEidtorMainWindow):
 
         # 删除tabWidget的第二个tab
         self.EditorTabWidget.removeTab(1)
+        self.EditorTabWidget.removeTab(0)
 
     '''Logic Func below'''
 
@@ -144,20 +146,22 @@ class EditorMain(QMainWindow, Ui_ElemQssEidtorMainWindow):
         self.stackedWidget.setCurrentIndex(1)
         if fileName:
             if self.OPEN_FILE_NUM == 0:
-                self.CodeEditor.loadFile(fileName)
-                self.changeTabTitle(self.OPEN_FILE_NUM, fileName.split('/')[-1])
+                curCodeEditor = CodeEditor(filelist=self.OPEN_FILE_LIST)
+                curCodeEditor.loadFile(fileName)
+                self.EditorTabWidget.addTab(curCodeEditor, fileName.split('/')[-1])
                 self.OPEN_FILE_NUM += 1
                 self.OPEN_FILE_LIST.append(fileName)
             else:
                 if fileName in self.OPEN_FILE_LIST:
                     self.changeTabTitle(self.OPEN_FILE_LIST.index(fileName), fileName.split('/')[-1])
                 else:
-                    curCodeEditor = CodeEditor()
+                    curCodeEditor = CodeEditor(filelist=self.OPEN_FILE_LIST)
                     curCodeEditor.loadFile(fileName)
                     self.EditorTabWidget.addTab(curCodeEditor, fileName.split('/')[-1])
                     self.OPEN_FILE_LIST.append(fileName)
                     self.EditorTabWidget.setCurrentIndex(self.OPEN_FILE_NUM)
                     self.OPEN_FILE_NUM += 1
+
             self.updatePreview()
         else:
             pass
@@ -241,15 +245,16 @@ class EditorMain(QMainWindow, Ui_ElemQssEidtorMainWindow):
         self.stackedWidget.setCurrentIndex(1)
         if item.text() not in self.OPEN_FILE_LIST:
             if self.OPEN_FILE_NUM == 0:
-                self.CodeEditor.loadFile(self.projectFolder + '/' + item.text())
-                self.changeTabTitle(0, item.text())
+                curCodeEditor = CodeEditor(filelist=self.OPEN_FILE_LIST)
+                curCodeEditor.loadFile(self.projectFolder + '/' + item.text())
+                self.EditorTabWidget.addTab(curCodeEditor, item.text())
                 self.OPEN_FILE_LIST.append(item.text())
                 self.CODE_EDITORS.append(self.CodeEditor)
                 self.OPEN_FILE_NUM += 1
-                self.CodeEditor.textChanged.connect(self.updatePreview)
+                curCodeEditor.textChanged.connect(self.updatePreview)
             else:
                 self.OPEN_FILE_LIST.append(item.text())
-                curCodeEditor = CodeEditor()
+                curCodeEditor = CodeEditor(filelist=self.OPEN_FILE_LIST)
                 self.EditorTabWidget.addTab(curCodeEditor, item.text())
                 curCodeEditor.loadFile(self.projectFolder + '/' + item.text())
                 self.changeTabTitle(self.OPEN_FILE_NUM, item.text())

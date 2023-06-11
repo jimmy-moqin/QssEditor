@@ -7,11 +7,14 @@ import difflib
 import json
 
 from PyQt5.QtCore import QEvent, QObject, QPoint, QRect, QSize, Qt, pyqtSignal
-from PyQt5.QtGui import (QColor, QFont, QKeyEvent, QKeySequence, QMouseEvent, QPainter, QPalette, QSyntaxHighlighter,
-                         QTextCharFormat, QTextCursor, QTextFormat, QTextOption)
+from PyQt5.QtGui import (QColor, QFont, QKeyEvent, QKeySequence, QMouseEvent,
+                         QPainter, QPalette, QSyntaxHighlighter,
+                         QTextCharFormat, QTextCursor, QTextFormat,
+                         QTextOption)
 from PyQt5.QtWidgets import QListWidget, QPlainTextEdit, QTextEdit, QWidget
-
 from utils.sassHighLight import SassHighlighter
+
+from widgets.codeprompt import CodePrompt
 
 DARK_BLUE = QColor(62, 61, 50)
 DARK_GRAY = QColor(144, 144, 138)
@@ -38,8 +41,8 @@ class KeyboardEventFilter(QObject):
     def handleUpKey(self):
         # 处理上键事件
         code_editor = self.code_editor
-        floating_widget = code_editor.floating_widget
-        list_widget = floating_widget.listWidget
+        code_prompt = code_editor.code_prompt
+        list_widget = code_prompt.listWidget
         current_row = list_widget.currentRow()
         if current_row > 0:
             list_widget.setCurrentRow(current_row - 1)
@@ -47,55 +50,14 @@ class KeyboardEventFilter(QObject):
     def handleDownKey(self):
         # 处理下键事件
         code_editor = self.code_editor
-        floating_widget = code_editor.floating_widget
-        list_widget = floating_widget.listWidget
+        code_prompt = code_editor.code_prompt
+        list_widget = code_prompt.listWidget
         current_row = list_widget.currentRow()
         if current_row < list_widget.count() - 1:
             list_widget.setCurrentRow(current_row + 1)
 
 
-class FloatingWidget(QWidget):
 
-    def __init__(self, parent=None):
-        super().__init__(parent)
-
-        # 创建一个ComboBox
-        self.listWidget = QListWidget(self)
-        self.listWidget.setObjectName("codeListWidget")
-        with open("utils\sassHighLight.json", "r") as f:
-            data = json.load(f)
-            keywords = data["keywords"]
-            units = data["units"]
-            attributes = data["attributes"]
-            pseudostates = data["pseudostates"]
-            subcontrols = data["subcontrols"]
-
-        self.items = keywords + units + attributes + pseudostates + subcontrols
-
-    def updateItems(self, keyword):
-        matches = []
-        for item in self.items:
-            similarity = difflib.SequenceMatcher(None, keyword, item).ratio()
-            if similarity > 0.25:
-                matches.append((item, similarity))
-
-        matches.sort(key=lambda x: x[1], reverse=True)
-        print(matches)
-
-        if len(matches) > 0:
-            self.clearItems()
-            for item, _ in matches:
-                self.listWidget.addItem(item)
-            return 1
-        else:
-            return 0
-
-    def clearItems(self):
-        self.listWidget.clear()
-
-    def moveWithCursor(self, position, offset=QPoint(0, 30)):
-        # 根据光标的位置移动Widget  # 设置Widget相对于光标的偏移量
-        self.move(position + offset)
 
 
 class LineNumberArea(QWidget):
@@ -278,7 +240,7 @@ class CodeTextEdit(QPlainTextEdit):
 
 class CodeEditor(CodeTextEdit):
 
-    def __init__(self):
+    def __init__(self, filelist):
         super(CodeEditor, self).__init__()
 
         self.line_number_area = LineNumberArea(self)
@@ -300,25 +262,25 @@ class CodeEditor(CodeTextEdit):
         self.highlight_current_line()
 
         self.highlighter = SassHighlighter(self.document())
+        
+        self.code_prompt = CodePrompt(filelist,self)
+        self.code_prompt.hide()
 
-        self.floating_widget = FloatingWidget(self)
-        self.floating_widget.hide()
-
-        self.textChanged.connect(self.updateFloatingWidgetPosition)
+        self.textChanged.connect(self.updateCodePromptPosition)
         self.textChanged.connect(self.focus)
-        self.cursorPositionChanged.connect(self.hidefloatingWidget)
+        self.cursorPositionChanged.connect(self.hideCodePrompt)
 
         self.keyboard_event_filter = KeyboardEventFilter(self)
 
-    def hidefloatingWidget(self):
-        self.floating_widget.hide()
+    def hideCodePrompt(self):
+        self.code_prompt.hide()
         self.removeEventFilter(self.keyboard_event_filter)
 
     def focus(self):
-        if self.floating_widget.isVisible():
+        if self.code_prompt.isVisible():
             # 键盘焦点转移到浮动窗口，选中第一个item
-            self.floating_widget.setFocus()
-            self.floating_widget.listWidget.setCurrentRow(0)
+            self.code_prompt.setFocus()
+            self.code_prompt.listWidget.setCurrentRow(0)
 
             # 将键盘上下键的事件过滤器安装到CodeEditor
             self.installEventFilter(self.keyboard_event_filter)
@@ -327,7 +289,7 @@ class CodeEditor(CodeTextEdit):
             self.setFocus()
             self.removeEventFilter(self.keyboard_event_filter)
 
-    def updateFloatingWidgetPosition(self):
+    def updateCodePromptPosition(self):
         # 获取光标位置
         cursor = self.textCursor()
         # 获取光标位置对应的矩形区域
@@ -335,20 +297,20 @@ class CodeEditor(CodeTextEdit):
         # 获取光标位置对应的坐标
         position = self.mapToParent(rect.topLeft())
 
-        self.floating_widget.moveWithCursor(position, offset=QPoint(self.line_number_area_width(), rect.height()))
+        self.code_prompt.moveWithCursor(position, offset=QPoint(self.line_number_area_width(), rect.height()))
 
         # 获取光标所在行的文本
         line_text = cursor.block().text()
         words = line_text.split()
         # 代码提示
         if (len(words) > 0):
-            if self.floating_widget.updateItems(words[-1]):
-                self.floating_widget.show()
+            if self.code_prompt.updateItems(words[-1]):
+                self.code_prompt.show()
             else:
-                self.floating_widget.hide()
+                self.code_prompt.hide()
                 self.removeEventFilter(self.keyboard_event_filter)
         else:
-            self.floating_widget.hide()
+            self.code_prompt.hide()
 
     def cursorRect(self, cursor):
         # 获取光标位置

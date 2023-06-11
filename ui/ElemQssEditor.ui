@@ -71,7 +71,7 @@
          <property name="maximumSize">
           <size>
            <width>40</width>
-           <height>30</height>
+           <height>40</height>
           </size>
          </property>
          <property name="text">
@@ -550,7 +550,7 @@
            <item>
             <widget class="QStackedWidget" name="stackedWidget">
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="homepage">
               <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -752,7 +752,7 @@
                  <property name="currentIndex">
                   <number>0</number>
                  </property>
-                 <widget class="CodeEditor" name="CodeEditor">
+                 <widget class="QWidget" name="CodeEditor">
                   <attribute name="title">
                    <string>Tab 1</string>
                   </attribute>
@@ -1032,14 +1032,6 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>CodeEditor</class>
-   <extends>QWidget</extends>
-   <header>codeeditor.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../resource/qrc/mainQrc.qrc"/>
  </resources>
